@@ -11,13 +11,32 @@ namespace _2020AdventCode
         private static List<int> _Balance;
 
         public int BalanceProduct { get; set; }
+        private int checkValue = 2020;
 
         private void CheckValues()
         {
-            int checkValue = 2020;
-            foreach(int Item1 in _Balance)
+            //twoLoopRun();
+            ThreeLoopRun();
+        }
+        private void twoLoopRun()
+        {
+            foreach (int Item1 in _Balance)
             {
-                foreach(int Item2 in _Balance)
+                foreach (int Item2 in _Balance)
+                {
+                    if (Item1 + Item2 == checkValue)
+                    {
+                        BalanceProduct = Item1 * Item2;
+                    }
+                }
+            }
+        }
+
+        private void ThreeLoopRun()
+        {
+            foreach (int Item1 in _Balance)
+            {
+                foreach (int Item2 in _Balance)
                 {
                     foreach (int Item3 in _Balance)
                     {
