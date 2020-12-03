@@ -49,9 +49,13 @@ namespace _2020AdventCode
             }
         }
 
-        public Day1Challenge(List<int> BL)
+        public Day1Challenge(string[] BL)
         {
-            _Balance = BL;
+            _Balance = new List<int>();
+            foreach (string line in BL)
+            {
+                _Balance.Add(Convert.ToInt32(line));
+            }
             CheckValues();
         }
     }
