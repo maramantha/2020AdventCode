@@ -23,6 +23,13 @@ namespace _2020AdventCode
             Day2Challenge D2 = new Day2Challenge(inputReader(userFolder));
             return D2.validPasswordCount.ToString();
         }
+        private static string Day3Challenge()
+        {
+            string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            userFolder = userFolder + @"\Pictures\InputCode\Day3Input.txt";
+            Day3Challenge D3 = new Day3Challenge(inputReader(userFolder));
+            return D3.TreeEncounterCount.ToString();
+        }
         private static string[] inputReader(string fileName)
         {
             string input;
@@ -44,6 +51,10 @@ namespace _2020AdventCode
             Console.WriteLine("Day 2 Answer: ");
             outputAnswer = Day2Challenge();
             Console.WriteLine("Number of Good Passwords: " + outputAnswer);
+            Console.WriteLine("");
+            Console.WriteLine("Day 3 Answer: ");
+            outputAnswer = Day3Challenge();
+            Console.WriteLine("Number of Trees hit: " + outputAnswer);
             Console.WriteLine("");
         }
     }
