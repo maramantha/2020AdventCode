@@ -30,6 +30,13 @@ namespace _2020AdventCode
             Day3Challenge D3 = new Day3Challenge(inputReader(userFolder));
             return D3.TreeEncounterCount.ToString();
         }
+        private static string Day4Challenge()
+        {
+            string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            userFolder = userFolder + @"\Pictures\InputCode\Day4Input.txt";
+            Day4Challenge D4 = new Day4Challenge(inputReader(userFolder));
+            return D4.validPassportCount.ToString();
+        }
         private static string[] inputReader(string fileName)
         {
             string input;
@@ -55,6 +62,10 @@ namespace _2020AdventCode
             Console.WriteLine("Day 3 Answer: ");
             outputAnswer = Day3Challenge();
             Console.WriteLine("Number of Trees hit: " + outputAnswer);
+            Console.WriteLine("");
+            Console.WriteLine("Day 4 Answer: ");
+            outputAnswer = Day4Challenge();
+            Console.WriteLine("Number of Valid Passports: " + outputAnswer);
             Console.WriteLine("");
         }
     }
