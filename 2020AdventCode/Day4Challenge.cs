@@ -22,6 +22,7 @@ namespace _2020AdventCode
             public string pid;
             public string cid;
         }
+        
         private void lineSplitter(List<string> Passport, out passportData filledPassport)
         {
             passportData TPD = new passportData();
@@ -87,23 +88,195 @@ namespace _2020AdventCode
             oneFile.Clear();
 
         }
+        private bool validBirthYear(int checkValue)
+        {
+            int lwrYear = 1920;
+            int upperYear = 2002;
+            bool checkRtn = checkValue != 0;
+            if (checkRtn)
+            {
+                checkRtn = checkValue > 999 && checkValue < 10000; //4 digit value
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue <= upperYear;
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue >= lwrYear;
+            }
+            return checkRtn;
+        }
+        private bool validIssueYear(int checkValue)
+        {
+            int lwrYear = 2010;
+            int upperYear = 2020;
+            bool checkRtn = checkValue != 0;
+            if (checkRtn)
+            {
+                checkRtn = checkValue > 999 && checkValue<10000; //4 digit value
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue <= upperYear;
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue >= lwrYear;
+            }
+            return checkRtn;
+        }
+        private bool validExprYear(int checkValue)
+        {
+            int lwrYear = 2020;
+            int upperYear = 2030;
+            bool checkRtn = checkValue != 0;
+            if (checkRtn)
+            {
+                checkRtn = checkValue > 999 && checkValue < 10000; //4 digit value
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue <= upperYear;
+            }
+            if (checkRtn)
+            {
+                checkRtn = checkValue >= lwrYear;
+            }
+            return checkRtn;
+        }
+        private bool validHght(string checkValue)
+        {
+            int cmLwr = 150;
+            int cmUpr = 193;
+            int inLwr = 59;
+            int inUpr = 76;
+            bool checkRtn = false;
+            int heightVal;
+            if (checkValue != null)
+            {
+                if (checkValue.Contains("in"))
+                {
+                    try
+                    {
+                        heightVal = Convert.ToInt32(checkValue.Replace("in", ""));
+                        checkRtn = heightVal >= inLwr;
+                        if (checkRtn)
+                        {
+                            checkRtn = heightVal <= inUpr;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        checkRtn = false;
+                    }
+                } else if (checkValue.Contains("cm"))
+                {
+                    try
+                    {
+                        heightVal = Convert.ToInt32(checkValue.Replace("cm", ""));
+                        checkRtn = heightVal >= cmLwr;
+                        if (checkRtn)
+                        {
+                            checkRtn = heightVal <= cmUpr;
+                        }
+                    } catch(Exception ex)
+                    {
+                        checkRtn = false;
+                    }
+                }
+            }
+            return checkRtn;
+        }
+        private bool validPid(string checkValue)
+        {
+            bool checkRtn = false;
+            if (checkValue != null)
+            { 
+            checkRtn = checkValue.Length == 9;
+            int tempHold;
+            try
+            {
+                if(checkRtn)
+                {
+                    tempHold = Convert.ToInt32(checkValue);
+                }
+            } catch(Exception ex)
+            {
+                checkRtn = false;
+            }
+            }
+            return checkRtn;
+        }
+        private bool validEyeColor(string checkValue)
+        {
+            bool checkRtn = false;
+            if (checkValue != null)
+            {
+                switch (checkValue)
+                {
+                    case "amb":
+                        checkRtn = true;
+                        break;
+                    case "blu":
+                        checkRtn = true;
+                        break;
+                    case "brn":
+                        checkRtn = true;
+                        break;
+                    case "gry":
+                        checkRtn = true;
+                        break;
+                    case "grn":
+                        checkRtn = true;
+                        break;
+                    case "hzl":
+                        checkRtn = true;
+                        break;
+                    case "oth":
+                        checkRtn = true;
+                        break;
+                }
+
+            }
+            return checkRtn;
+        }
+        private bool validHair(string checkValue)
+        {
+            char[] HexValues = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+            bool checkRtn = false;
+            if (checkValue != null)
+            {
+                if(checkValue[0] =='#')
+                {
+                    checkRtn = checkValue.Length == 7;
+                    for(int i = 1; i < checkValue.Length; i++)
+                    {
+                        checkRtn = HexValues.Contains(checkValue[i]);
+                    }
+                }
+                
+            }
+            return checkRtn;
+        }
+
         private void cntValidPassports(ref List<passportData> PD)
         {
             foreach(passportData Passport in PD)
             {
-                if(Passport.birthYear != 0)
+                if(validBirthYear(Passport.birthYear))
                 {
-                    if (Passport.issueYear != 0)
+                    if (validIssueYear(Passport.issueYear))
                     {
-                        if (Passport.expirationYear != 0)
+                        if (validExprYear(Passport.expirationYear))
                         {
-                            if (Passport.height != null)
+                            if (validHght(Passport.height))
                             {
-                                if (Passport.hairColor != null)
+                                if (validHair(Passport.hairColor))
                                 {
-                                    if (Passport.eyeColor != null)
+                                    if (validEyeColor(Passport.eyeColor))
                                     {
-                                        if (Passport.pid != null)
+                                        if (validPid(Passport.pid))
                                         {
                                             _validPassportCount++;
                                         }
