@@ -42,7 +42,14 @@ namespace _2020AdventCode
             string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             userFolder = userFolder + @"\Pictures\InputCode\Day5Input.txt";
             Day5Challenge D5 = new Day5Challenge(inputReader(userFolder));
-            return D5.highestSeatID.ToString();
+            return D5.yourSeatID.ToString();
+        }
+        private static string Day6Challenge()
+        {
+            string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            userFolder = userFolder + @"\Pictures\InputCode\Day6Input.txt";
+            Day6Challenge D6 = new Day6Challenge(inputReader(userFolder));
+            return D6.sumYesAnswers.ToString();
         }
         private static string[] inputReader(string fileName)
         {
@@ -76,7 +83,11 @@ namespace _2020AdventCode
             Console.WriteLine("");
             Console.WriteLine("Day 5 Answer: ");
             outputAnswer = Day5Challenge();
-            Console.WriteLine("Highest Seat ID: " + outputAnswer);
+            Console.WriteLine("Your Seat ID: " + outputAnswer);
+            Console.WriteLine("");
+            Console.WriteLine("Day 6 Answer: ");
+            outputAnswer = Day6Challenge();
+            Console.WriteLine("Sum of Yes Answers: " + outputAnswer);
             Console.WriteLine("");
         }
     }
