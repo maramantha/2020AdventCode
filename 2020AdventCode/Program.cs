@@ -37,6 +37,13 @@ namespace _2020AdventCode
             Day4Challenge D4 = new Day4Challenge(inputReader(userFolder));
             return D4.validPassportCount.ToString();
         }
+        private static string Day5Challenge()
+        {
+            string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            userFolder = userFolder + @"\Pictures\InputCode\Day5Input.txt";
+            Day5Challenge D5 = new Day5Challenge(inputReader(userFolder));
+            return D5.highestSeatID.ToString();
+        }
         private static string[] inputReader(string fileName)
         {
             string input;
@@ -66,6 +73,10 @@ namespace _2020AdventCode
             Console.WriteLine("Day 4 Answer: ");
             outputAnswer = Day4Challenge();
             Console.WriteLine("Number of Valid Passports: " + outputAnswer);
+            Console.WriteLine("");
+            Console.WriteLine("Day 5 Answer: ");
+            outputAnswer = Day5Challenge();
+            Console.WriteLine("Highest Seat ID: " + outputAnswer);
             Console.WriteLine("");
         }
     }
