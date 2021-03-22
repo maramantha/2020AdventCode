@@ -62,7 +62,6 @@ namespace _2020AdventCode
                     }
                 }
             }
-
             filledPassport = TPD;
         }
 
@@ -237,7 +236,6 @@ namespace _2020AdventCode
                         checkRtn = true;
                         break;
                 }
-
             }
             return checkRtn;
         }
@@ -296,7 +294,5 @@ namespace _2020AdventCode
             cntValidPassports(ref PD);
 
         }
-
-
     }
 }

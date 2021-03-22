@@ -51,6 +51,13 @@ namespace _2020AdventCode
             Day6Challenge D6 = new Day6Challenge(inputReader(userFolder));
             return D6.sumYesAnswers.ToString();
         }
+        private static string Day7Challenge()
+        {
+            string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            userFolder = userFolder + @"\Pictures\InputCode\TestInput.txt";
+            Day7Challenge D7 = new Day7Challenge(inputReader(userFolder),"shiny gold", 1);
+            return D7.BagCounttoTargetBag.ToString();
+        }
         private static string[] inputReader(string fileName)
         {
             string input;
@@ -89,6 +96,10 @@ namespace _2020AdventCode
             outputAnswer = Day6Challenge();
             Console.WriteLine("Sum of Yes Answers: " + outputAnswer);
             Console.WriteLine("");
-        }
+            Console.WriteLine("Day 7 Answer: ");
+            outputAnswer = Day7Challenge();
+            Console.WriteLine("Sum of bag steps to gold bag: " + outputAnswer);
+            Console.WriteLine("");
+         }
     }
 }
