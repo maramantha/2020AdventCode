@@ -165,7 +165,7 @@ namespace _2020AdventCode
                 }
         }
         
-        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int BagHolderCnt)
+        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int BagHolderCnt, out HashSet<string> BagholderSet)
         {
             BagHolderCnt = 0;
             HashSet<string> BagHolder = new HashSet<string>();
@@ -181,16 +181,56 @@ namespace _2020AdventCode
                 }
             }
             BagHolderCnt = BagHolder.Count();
+            BagholderSet = BagHolder;
             return false;
         }
-        
+        private int BagsContainCount(List<Bag> CBL, string targetBag, string OrginColor = "Out")
+        {
+            int BagHolderCnt = 0;
+
+            foreach (Bag cb in CBL)
+            {
+                if (cb.getBagName() == targetBag)
+                {
+                    foreach (Bags containee in cb.BagsThisContains())
+                    {
+                        BagHolderCnt += containee.Num + containee.Num * BagsContainCount(CBL, containee.Color, targetBag);
+                    }
+                }
+            }
+
+            return BagHolderCnt;
+        }
+
+        private bool BagsContainCount(List<Bag> CBL, string targetBag, out int BagHolderCnt)
+        {
+            BagHolderCnt = 0;
+
+            foreach(Bag cb in CBL)
+            {
+                if(cb.getBagName() == targetBag)
+                {
+                    foreach(Bags containee in cb.BagsThisContains())
+                    {
+                        BagHolderCnt += containee.Num + containee.Num * BagsContainCount(CBL, containee.Color, targetBag);
+                    }
+                }
+            }
+            return false;
+        }
+
+
         public Day7Challenge(string[] grpAnswers, string searchBag, int minQty)
         {
             List<Bag> BagPool = new List<Bag>();
+            HashSet<string> BagholderSet = new HashSet<string>();
             listCreater(ref BagPool, ref grpAnswers);
-            BagsContainTarget(BagPool, searchBag, out LongestRoute);
+            BagsContainTarget(BagPool, searchBag, out LongestRoute, out BagholderSet);
+            BagsContainCount(BagPool, searchBag, out NumBags);
         }
         private int LongestRoute;
         public int GetLogestedRoute() { return LongestRoute; }
+        private int NumBags;
+        public int GetNumBags() { return NumBags; }
     }
 }
