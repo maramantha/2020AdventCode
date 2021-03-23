@@ -109,8 +109,14 @@ namespace _2020AdventCode
                     
 
                 }
-                CBLContainedInOtehrBags(ref CBL, ref baggage);
                 CBL.Add(baggage);
+            }
+            foreach(Bag bg in CBL)
+            {
+                
+                Bag beta = bg;
+                CBLContainedInOtehrBags(ref CBL, ref beta);
+                //CBL[CBL.IndexOf(bg)] = beta;
             }
 
         }
@@ -121,9 +127,9 @@ namespace _2020AdventCode
         {
             foreach(Bag bg in CBL)
             {
-                if (bg.ContainColor(baggage.getBagName()))
+                if (bg.ContainColor(baggage.getBagName()) && !(bg.getBagName() == baggage.getBagName()))
                 {
-                    baggage.ContainIn(bg);
+                    CBL[CBL.IndexOf(baggage)].ContainIn(bg);
 
                 }
 
@@ -162,30 +168,33 @@ namespace _2020AdventCode
 
         }
 
+        private int BagsContainTarget(List<Bag> CBL, Bag startBag)
+        {
+            int tempRouteCount = CBL[CBL.IndexOf(startBag)].bagsContainedin().Count();
+            foreach (Bag cb in CBL[CBL.IndexOf(startBag)].bagsContainedin())
+                {
+                    tempRouteCount += BagsContainTarget(CBL, cb);
+                }
+            return tempRouteCount;
+        }
 
-        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int RouteCount, string startBag = null)
+
+        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int RouteCount)
         {
             RouteCount = 0;
             int tempRouteCount = 0;
             foreach (Bag bg in CBL)
             {
-                if (startBag is null || startBag == bg.getBagName())
+                if(bg.getBagName() == targetBag)
                 {
-                    foreach (Bags cb in bg.BagsThisContains())
+                    tempRouteCount = bg.bagsContainedin().Count();
+                    foreach(Bag cb in bg.bagsContainedin())
                     {
-                        if (cb.Color == targetBag)
-                        {
-                            RouteCount++;
-                        } else if(startBag is null)
-                        {
-
-                        }
-                        
-
+                        tempRouteCount += BagsContainTarget(CBL, cb);
                     }
                 }
-                
             }
+            RouteCount = tempRouteCount;
             return false;
         }
 

@@ -54,9 +54,9 @@ namespace _2020AdventCode
         private static string Day7Challenge()
         {
             string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
-            userFolder = userFolder + @"\Pictures\InputCode\TestInput.txt";
+            userFolder = userFolder + @"\Pictures\InputCode\Day7Input.txt";
             Day7Challenge D7 = new Day7Challenge(inputReader(userFolder),"shiny gold", 1);
-            return D7.BagCounttoTargetBag.ToString();
+            return D7.GetLogestedRoute().ToString();
         }
         private static string[] inputReader(string fileName)
         {
