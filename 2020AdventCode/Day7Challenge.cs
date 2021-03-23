@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace _2020AdventCode
 {
-    
     class Day7Challenge
     {
         class Bag
@@ -59,7 +58,6 @@ namespace _2020AdventCode
             {
                 return containedIn;
             }
-
         }
 
         class Bags
@@ -70,13 +68,10 @@ namespace _2020AdventCode
         private double _BagCounttoTargetBag { get; set; }
         public double BagCounttoTargetBag { get => _BagCounttoTargetBag; }
         
-
         private void listCreater(ref List<Bag> CBL, ref string[] GA)
         {
-           
             foreach (string line in GA)
             {
-                
                 string[] lineContained = new string[2]; //= ;
                 lineContained[0] = line.Substring(0, line.IndexOf("contain")).Replace("bags", "").Trim();// contained[0];
                 Bag baggage = new Bag(lineContained[0]);
@@ -106,22 +101,15 @@ namespace _2020AdventCode
                     {
                         Console.WriteLine(bg);
                     }
-                    
-
                 }
                 CBL.Add(baggage);
             }
             foreach(Bag bg in CBL)
             {
-                
                 Bag beta = bg;
                 CBLContainedInOtehrBags(ref CBL, ref beta);
-                //CBL[CBL.IndexOf(bg)] = beta;
             }
-
         }
-
-        
 
         private void CBLContainedInOtehrBags(ref List<Bag> CBL, ref Bag baggage)
         {
@@ -130,9 +118,7 @@ namespace _2020AdventCode
                 if (bg.ContainColor(baggage.getBagName()) && !(bg.getBagName() == baggage.getBagName()))
                 {
                     CBL[CBL.IndexOf(baggage)].ContainIn(bg);
-
                 }
-
             }
         }
 
@@ -157,7 +143,6 @@ namespace _2020AdventCode
                             FindLongestRouteforSetColor(CBLRep, targetBag, bgs.getBagName(), out tempRouteCount);
                             tempRouteCount++;
                         }
-                         
                     }
                     bg.visited = true;
                 }
@@ -168,37 +153,37 @@ namespace _2020AdventCode
 
         }
 
-        private int BagsContainTarget(List<Bag> CBL, Bag startBag)
+        private void BagsContainTarget(ref List<Bag> CBL, Bag startBag, ref HashSet<string> bagHolder)
         {
-            int tempRouteCount = CBL[CBL.IndexOf(startBag)].bagsContainedin().Count();
             foreach (Bag cb in CBL[CBL.IndexOf(startBag)].bagsContainedin())
                 {
-                    tempRouteCount += BagsContainTarget(CBL, cb);
+                if(!bagHolder.Contains(cb.getBagName()))
+                {
+                    bagHolder.Add(cb.getBagName());
                 }
-            return tempRouteCount;
+                BagsContainTarget(ref CBL, cb, ref bagHolder);
+                }
         }
-
-
-        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int RouteCount)
+        
+        private bool BagsContainTarget(List<Bag> CBL, string targetBag, out int BagHolderCnt)
         {
-            RouteCount = 0;
-            int tempRouteCount = 0;
+            BagHolderCnt = 0;
+            HashSet<string> BagHolder = new HashSet<string>();
             foreach (Bag bg in CBL)
             {
                 if(bg.getBagName() == targetBag)
                 {
-                    tempRouteCount = bg.bagsContainedin().Count();
                     foreach(Bag cb in bg.bagsContainedin())
                     {
-                        tempRouteCount += BagsContainTarget(CBL, cb);
+                        BagHolder.Add(cb.getBagName());
+                        BagsContainTarget(ref CBL, cb, ref BagHolder);
                     }
                 }
             }
-            RouteCount = tempRouteCount;
+            BagHolderCnt = BagHolder.Count();
             return false;
         }
-
-
+        
         public Day7Challenge(string[] grpAnswers, string searchBag, int minQty)
         {
             List<Bag> BagPool = new List<Bag>();
