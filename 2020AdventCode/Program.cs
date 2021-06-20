@@ -51,12 +51,24 @@ namespace _2020AdventCode
             Day6Challenge D6 = new Day6Challenge(inputReader(userFolder));
             return D6.sumYesAnswers.ToString();
         }
-        private static string Day7Challenge()
+        private static string Day7Challenge(string targetBag)
         {
             string userFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             userFolder = userFolder + @"\Pictures\InputCode\Day7Input.txt";
-            Day7Challenge D7 = new Day7Challenge(inputReader(userFolder),"shiny gold", 1);
+            Day7Challenge D7 = new Day7Challenge(inputReader(userFolder),targetBag, 1);
             return D7.GetLogestedRoute().ToString();
+        }
+        private static string Day9Challenge()
+        {
+            string userFolder = @"C:\Users\natha\Source\Repos\maramantha\2020AdventCode\2020AdventCode\Resources\Day9Input.txt";
+            Day9Challenge D9 = new Day9Challenge(inputReader(userFolder),25);
+            return D9.MissingFactorOutput().ToString();
+        }
+        private static string Day10Challenge()
+        {
+            string userFolder = @"C:\Users\natha\Source\Repos\maramantha\2020AdventCode\2020AdventCode\Resources\Day10Input.txt";
+            Day10Challenge D10 = new Day10Challenge(inputReader(userFolder));
+            return D10.SomeValu().ToString();
         }
         private static string[] inputReader(string fileName)
         {
@@ -72,33 +84,40 @@ namespace _2020AdventCode
         }
         static void Main(string[] args)
         {
-            string outputAnswer = Day1Challenge();
-            Console.WriteLine("Day 1 Answer: ");
-            Console.WriteLine("My Balance: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 2 Answer: ");
-            outputAnswer = Day2Challenge();
-            Console.WriteLine("Number of Good Passwords: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 3 Answer: ");
-            outputAnswer = Day3Challenge();
-            Console.WriteLine("Number of Trees hit: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 4 Answer: ");
-            outputAnswer = Day4Challenge();
-            Console.WriteLine("Number of Valid Passports: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 5 Answer: ");
-            outputAnswer = Day5Challenge();
-            Console.WriteLine("Your Seat ID: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 6 Answer: ");
-            outputAnswer = Day6Challenge();
-            Console.WriteLine("Sum of Yes Answers: " + outputAnswer);
-            Console.WriteLine("");
-            Console.WriteLine("Day 7 Answer: ");
-            outputAnswer = Day7Challenge();
-            Console.WriteLine("Sum of bag steps to gold bag: " + outputAnswer);
+            string outputAnswer = "";
+            //outputAnswer = Day1Challenge();
+            //Console.WriteLine("Day 1 Answer: ");
+            //Console.WriteLine("My Balance: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 2 Answer: ");
+            //outputAnswer = Day2Challenge();
+            //Console.WriteLine("Number of Good Passwords: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 3 Answer: ");
+            //outputAnswer = Day3Challenge();
+            //Console.WriteLine("Number of Trees hit: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 4 Answer: ");
+            //outputAnswer = Day4Challenge();
+            //Console.WriteLine("Number of Valid Passports: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 5 Answer: ");
+            //outputAnswer = Day5Challenge();
+            //Console.WriteLine("Your Seat ID: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 6 Answer: ");
+            //outputAnswer = Day6Challenge();
+            //Console.WriteLine("Sum of Yes Answers: " + outputAnswer);
+            //Console.WriteLine("");
+            //Console.WriteLine("Day 7 Answer: ");
+            //outputAnswer = Day7Challenge("shiny gold");
+            //Console.WriteLine("Sum of bag steps to gold bag: " + outputAnswer);
+            //Console.WriteLine("");
+            //outputAnswer = Day9Challenge();
+            //Console.WriteLine("Day 9 Challenge Answer: " + outputAnswer);
+            //Console.WriteLine("");
+            outputAnswer = Day10Challenge();
+            Console.WriteLine("Day 10 Challenge Answer: " + outputAnswer);
             Console.WriteLine("");
          }
     }
